@@ -79,8 +79,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".BoxActivity"></activity>
+        <activity android:name=".BOX_MAP.MapActivity"></activity>
+        <activity android:name=".BOX_MAP.BoxActivity"></activity>
 
     </application>
 

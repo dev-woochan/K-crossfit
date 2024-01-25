@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.k_crossfit.BoxActivity;
-import com.example.k_crossfit.MapActivity;
+import com.example.k_crossfit.BOX_MAP.BoxActivity;
 import com.example.k_crossfit.myPage.MyPageActivity;
 import com.example.k_crossfit.R;
 import com.example.k_crossfit.TimerActivity;

@@ -1,4 +1,4 @@
-package com.example.k_crossfit;
+package com.example.k_crossfit.BOX_MAP;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.k_crossfit.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;

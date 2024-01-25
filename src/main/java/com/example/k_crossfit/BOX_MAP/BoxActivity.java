@@ -1,4 +1,4 @@
-package com.example.k_crossfit;
+package com.example.k_crossfit.BOX_MAP;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.example.k_crossfit.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
