@@ -44,53 +44,44 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             workoutCount.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                 }
-
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
                     String enteredText = s.toString();
                     int position = getAdapterPosition();
                     WorkoutData workoutData = workoutDataArrayList.get(position);
 
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         try {
                             String count = enteredText;
                             workoutData.workoutCount = count;
-                        }catch (Exception e){
-                            Log.d("workoutCount", "afterTextChanged: "+e);
+                        } catch (Exception e) {
+                            Log.d("workoutCount", "afterTextChanged: " + e);
                         }
                     }
-
                 }
             });
 
             workoutName.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                 }
-
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
                     String enteredText = s.toString();
                     int position = getAdapterPosition();
                     WorkoutData workoutData = workoutDataArrayList.get(position);
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         try {
                             workoutData.workoutName = enteredText;
-                        }catch (Exception e){
-                            Log.d("workoutName", "afterTextChanged: "+ e);
+                        } catch (Exception e) {
+                            Log.d("workoutName", "afterTextChanged: " + e);
                         }
                     }
                 }
@@ -100,25 +91,21 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             workoutWeight.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                 }
-
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
                     String enteredText = s.toString();
                     int position = getAdapterPosition();
                     WorkoutData workoutData = workoutDataArrayList.get(position);
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         try {
                             String weight = enteredText;
                             workoutData.workoutWeight = weight;
-                        }catch (Exception e){
-                            Log.d("workoutWeight", "afterTextChanged: "+e);
+                        } catch (Exception e) {
+                            Log.d("workoutWeight", "afterTextChanged: " + e);
                         }
                     }
                 }
@@ -127,24 +114,20 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             workoutUnit.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                 }
-
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
                     String enteredText = s.toString();
                     int position = getAdapterPosition();
                     WorkoutData workoutData = workoutDataArrayList.get(position);
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         try {
                             workoutData.workoutUnit = enteredText;
-                        }catch (Exception e){
-                            Log.d("workoutUnit", "afterTextChanged: "+ e);
+                        } catch (Exception e) {
+                            Log.d("workoutUnit", "afterTextChanged: " + e);
                         }
                     }
                 }
@@ -155,18 +138,16 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int position = getAdapterPosition();
                     WorkoutData workoutData = workoutDataArrayList.get(position);
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         try {
                             workoutData.setSelected(isChecked);
-                        }catch (Exception e){
-                            Log.d("workoutWeight", "afterTextChanged: "+e);
+                        } catch (Exception e) {
+                            Log.d("workoutWeight", "afterTextChanged: " + e);
                         }
                     }
                 }
             });
         }
-
-
     }
 
     public void deleteSelectedItems() {
@@ -177,7 +158,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             }
         }
     }
-
 
     public ArrayList<WorkoutData> saveWorkoutData() {
         return workoutDataArrayList;
@@ -191,99 +171,24 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         return vh;
     }
 
-
     public void onBindViewHolder(@NonNull WorkoutAdapter.ViewHolder holder, int position) {
         WorkoutData data = workoutDataArrayList.get(position);
-        if (data != null){
+        if (data != null) {
             try {
                 holder.workoutName.setText(data.workoutName);
                 holder.workoutCount.setText(data.workoutCount);
                 holder.workoutWeight.setText(data.workoutWeight);
                 holder.workoutUnit.setText(data.workoutUnit);
                 holder.workoutSelect.setChecked(data.isSelected());
-            }catch (Exception e){
-                Log.d("workoutAdapter", "onBindViewHolder: "+ e);
+            } catch (Exception e) {
+                Log.d("workoutAdapter", "onBindViewHolder: " + e);
             }
-
         }
 
 
-        //addTextChangedListener는 입력이 끝난뒤 변수에 입력되어있는 값을 저장할수있음 이를이용해 입력이 끝나면 변수에 stirng값을 저장함
-//        holder.workoutName.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                workoutData.workoutName = s.toString();
-//            }
-//        });
-//
-//        holder.workoutWeight.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                workoutData.workoutWeight = Integer.parseInt(s.toString());
-//            }
-//        });
-//        holder.workoutUnit.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                workoutData.workoutUnit = s.toString();
-//            }
-//        });
-//
-//        holder.workoutCount.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                workoutData.workoutCount = Integer.parseInt(s.toString());
-//            }
-//        });
-//
-//        holder.workoutSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                workoutData.setSelected(isChecked);
-//
-//            }
-//        });
     }
-    public void updateList (ArrayList<WorkoutData> list){
+
+    public void updateList(ArrayList<WorkoutData> list) {
         workoutDataArrayList.clear();
         workoutDataArrayList = list;
         notifyDataSetChanged();
