@@ -52,6 +52,10 @@ dependencies {
     //fragment
     val fragment_version = "1.6.2"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
+    implementation("androidx.activity:activity:1.8.2")
+    implementation("androidx.fragment:fragment:1.6.2")
+    //네이버지도 위치 반환 라이브러리
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
 
 
