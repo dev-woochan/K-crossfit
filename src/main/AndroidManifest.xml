@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> <!-- 외부 저장소 사용 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!--위치정보 허가 퍼미션-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <uses-feature android:name="android.hardware.camera" /> <!-- 카메라 허용 -->
     <uses-permission
@@ -21,10 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.K_crossfit"
         tools:targetApi="31">
-<!--        네이버 지도 api -->
+        <!--        네이버 지도 api -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="4y4nkzmsv4"/>
+            android:value="4y4nkzmsv4" />
 
         <activity
             android:name=".Calendar.AddingWodActivity"
@@ -75,10 +79,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity">
-        </activity>
-        <activity android:name=".BoxActivity">
-        </activity>
+        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".BoxActivity"></activity>
 
     </application>
 
