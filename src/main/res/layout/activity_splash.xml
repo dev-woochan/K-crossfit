@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ic_k_crossfit_background">
+
+    <TextView
+        android:id="@+id/TopText"
+        android:layout_width="301dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/giantsregulars"
+        android:gravity="center|center_horizontal"
+        android:text="K-CROSSFIT"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_splash_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="170dp"
+        android:fontFamily="@font/giantsregulars"
+        android:gravity="center"
+        android:text="쉽고 빠른"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TopText" />
+
+    <TextView
+        android:id="@+id/textview_splash_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="120dp"
+        android:fontFamily="@font/giantsregulars"
+        android:gravity="center"
+        android:text="나의 크로스핏기록🏋️‍♂️"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_splash_1" />
+
+    <TextView
+        android:id="@+id/textview_splash_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="157dp"
+        android:fontFamily="@font/giantsregulars"
+        android:gravity="center"
+        android:text="로딩중입니다"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_splash_2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

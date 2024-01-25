@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.K_crossfit" parent="Theme.AppCompat.Light">
+        <!-- Customize your light theme here. -->
+        <item name="windowNoTitle">true</item>
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <style name= "Hint" parent="TextAppearance.Design.Hint">
+        <item name = "android:textSize">12sp</item>
+    </style>
+
+    <style name="Theme.K_crossfit" parent="Base.Theme.K_crossfit" />
+
+    <style name="mainColorNavy" parent="Widget.AppCompat.Button.Colored">#0B2B4A</style>
+</resources>

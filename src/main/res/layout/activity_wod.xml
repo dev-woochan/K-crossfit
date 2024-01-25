@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/entireWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:id="@+id/WodModifyTopMenu"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center|top"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <Button
+            android:id="@+id/button_wod_back"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:fontFamily="@font/giantsregulars"
+            android:text=" Back"
+            android:textAllCaps="false"
+            android:textColor="#0B2B4A"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView_wod_title"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/giantsregulars"
+            android:gravity="center"
+            android:text="WOD 기록"
+            android:textAlignment="center"
+            android:textColor="#0B2B4A"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button_wod_share"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:fontFamily="@font/giantsregulars"
+            android:text="Share"
+            android:textAllCaps="false"
+            android:textColor="#0B2B4A"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/Linear1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/WodModifyTopMenu"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="10dp">
+
+            <EditText
+                android:id="@+id/editText_wod_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="#F1F1F1"
+                android:ems="10"
+                android:hint="0000-00-00"
+                android:inputType="date"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_wod_wodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="#F1F1F1"
+                android:hint="제목을 입력해주세요"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+
+
+            <LinearLayout
+                android:id="@+id/WodSelectButtonWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="#A1BCDF"
+                android:gravity="center"
+                android:orientation="horizontal"
+
+                >
+
+                <Button
+                    android:id="@+id/button_wod_addWorkout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="운동추가"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_wod_deleteWorkout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="삭제"
+                    android:textAllCaps="false" />
+
+<!--                <Button-->
+<!--                    android:id="@+id/EmomButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="EMOM"-->
+<!--                    android:textAllCaps="false" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/ForTimeButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:autoSizeMaxTextSize="@android:dimen/app_icon_size"-->
+<!--                    android:text="For Time"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textSize="13sp" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/StrengthButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Strength"-->
+<!--                    android:textAllCaps="false" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_wod_workoutView"
+            android:layout_width="match_parent"
+            android:layout_height="148dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="9dp"
+            android:background="#F1F1F1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Linear1">
+
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/memo_wod"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="bottom"
+        android:hint="메모"
+        android:maxHeight="200dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_wod_workoutView" />
+
+    <ImageView
+        android:id="@+id/imageView_wod_addPhoto"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="130dp"
+        android:background="@drawable/addwodphoto"
+        android:contentDescription="사진을 추가해주세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memo_wod" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_wod_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#B84F4F"
+            android:text="삭제"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button_wod_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#217824"
+
+            android:text="저장"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

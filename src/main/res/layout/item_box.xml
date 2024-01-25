@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="3dp"
+    android:background="@drawable/textbox">
+
+    <TextView
+        android:id="@+id/textview_boxItem_boxName"
+        android:layout_width="151dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
+        android:fontFamily="@font/giantsregulars"
+        android:gravity="center"
+        android:text="크로스핏 박스 이름"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="38dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="22dp"
+        android:text="TEL :"
+        app:layout_constraintStart_toEndOf="@+id/textview_boxItem_boxName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="46dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="드랍인 :"
+        app:layout_constraintStart_toEndOf="@+id/textview_boxItem_km"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textview_boxItem_telNum"
+        android:layout_width="123dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="10dp"
+        android:text="전화번호"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textview_boxItem_dropInFee"
+        android:layout_width="76dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="10dp"
+        android:text="20,000 원"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/textview_boxItem_km"
+        android:layout_width="123dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:text="거리km"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textview_boxItem_boxName"
+        app:layout_constraintTop_toBottomOf="@+id/textview_boxItem_boxName" />
+
+    <ImageView
+        android:id="@+id/imageview_boxItem_showMapBtn"
+        android:layout_width="30dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/navermap_default_marker_icon_green" />
+</androidx.constraintlayout.widget.ConstraintLayout>

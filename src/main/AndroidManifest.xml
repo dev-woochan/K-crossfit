@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> <!-- 외부 저장소 사용 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" /> <!-- 카메라 허용 -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_k_crossfit"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_k_crossfit_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.K_crossfit"
+        tools:targetApi="31">
+<!--        네이버 지도 api -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="4y4nkzmsv4"/>
+
+        <activity
+            android:name=".Calendar.AddingWodActivity"
+            android:parentActivityName=".Calendar.CalendarActivity"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.k_crossfit.file-provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/external" />
+        </provider>
+
+        <activity
+            android:name=".login.SignInActivity"
+            android:launchMode="standard"
+            android:parentActivityName=".login.LoginActivity" />
+
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:launchMode="standard">
+
+        </activity>
+
+        <activity
+            android:name=".Calendar.CalendarActivity"
+            android:exported="true"
+            android:launchMode="standard"></activity>
+
+        <activity
+            android:name=".TimerActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name=".myPage.MyPageActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name=".myPage.ChartActivity"
+            android:exported="true"
+            android:launchMode="standard" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MapActivity">
+        </activity>
+        <activity android:name=".BoxActivity">
+        </activity>
+
+    </application>
+
+</manifest>
