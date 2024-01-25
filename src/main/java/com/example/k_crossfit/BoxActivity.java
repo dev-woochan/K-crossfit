@@ -81,19 +81,22 @@ public class BoxActivity extends AppCompatActivity {
         });
         // 런처임 위치정보 허가를 해준다.
         locationPermissionRequest =
-                registerForActivityResult(new ActivityResultContracts
+                registerForActivityResult(new ActivityResultContracts //멀티플 permission으로 여러 STRING 리스트를 넣어주면 여러가지 허가 실행을함
                                 .RequestMultiplePermissions(), result -> {
+                    //결과에따라 허가권 설정함
                             Boolean fineLocationGranted = result.getOrDefault(
                                     Manifest.permission.ACCESS_FINE_LOCATION, false);
                             Boolean coarseLocationGranted = result.getOrDefault(
                                     Manifest.permission.ACCESS_COARSE_LOCATION, false);
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                editor.putBoolean("fineLocationGranted", true);
+                                // fineLocation허가시
+                                editor.putBoolean("fineLocationGranted", true); //쉐어드에 넣어주긴했는데 필요없는듯하다. 어차피 승인은 따로 얻어야하기때문 필요없으면 삭제하기!
                                 editor.commit();
                             } else if (coarseLocationGranted != null && coarseLocationGranted) {
                                 editor.putBoolean("coarseLocationGranted", true);
                                 editor.commit();
                             } else {
+                                //허가를 안눌렀을때 표시할 택스트
                                 Toast.makeText(this, "위치권한을 허가해야 내위치 불러오기 기능이 활성화 됩니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
