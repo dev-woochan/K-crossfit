@@ -64,6 +64,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="7dp"
+        android:paddingLeft="3dp"
         android:text="거리km"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textview_boxItem_boxName"
