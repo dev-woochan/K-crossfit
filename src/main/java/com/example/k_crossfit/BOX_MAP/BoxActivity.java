@@ -46,7 +46,9 @@ public class BoxActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private SharedPreferences setting;
     private ActivityResultLauncher<String[]> locationPermissionRequest;
-    Animation blink;
+    private Animation blink;
+    private double latitude; //위도
+    private double longitude; //경도
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +69,11 @@ public class BoxActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                //위도 경도값 인텐트에 넣어줌
+                if (latitude != 0 && longitude !=0){
+                    intent.putExtra("latitude",latitude);
+                    intent.putExtra("longitude",longitude);
+                }
                 startActivity(intent);
             }
         });
@@ -84,7 +91,7 @@ public class BoxActivity extends AppCompatActivity {
         locationPermissionRequest =
                 registerForActivityResult(new ActivityResultContracts //멀티플 permission으로 여러 STRING 리스트를 넣어주면 여러가지 허가 실행을함
                                 .RequestMultiplePermissions(), result -> {
-                    //결과에따라 허가권 설정함
+                            //결과에따라 허가권 설정함
                             Boolean fineLocationGranted = result.getOrDefault(
                                     Manifest.permission.ACCESS_FINE_LOCATION, false);
                             Boolean coarseLocationGranted = result.getOrDefault(
@@ -127,8 +134,8 @@ public class BoxActivity extends AppCompatActivity {
                         gpsBtn.setImageResource(R.drawable.gpsgreen);
                         //애니메이션 멈추기
                         gpsBtn.clearAnimation();
-                        double latitude = location.getLatitude();
-                        double longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
                         Log.d("gps", "위도 " + latitude + "경도 :" + longitude);
                         //한국 으로 설정 한 Geocoder
                         Geocoder g = new Geocoder(getApplicationContext(), Locale.KOREA);
