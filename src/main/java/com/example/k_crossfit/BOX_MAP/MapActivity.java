@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.k_crossfit.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.geometry.Tm128;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -84,6 +85,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             //세팅은 밑에가 맞는듯 ㅇㅇ
             CameraPosition cameraPosition = new CameraPosition(latLng,10);
             naverMap.setCameraPosition(cameraPosition);
+
+
         }
 
     }

@@ -56,6 +56,8 @@ dependencies {
     implementation("androidx.fragment:fragment:1.6.2")
     //네이버지도 위치 반환 라이브러리
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    //위도 경도 변환 라이브러리
+    implementation("org.locationtech.proj4j:proj4j:1.2.2")
 }
 
 

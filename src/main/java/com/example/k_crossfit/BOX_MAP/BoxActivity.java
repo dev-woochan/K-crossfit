@@ -1,5 +1,6 @@
 package com.example.k_crossfit.BOX_MAP;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
@@ -31,8 +33,18 @@ import com.example.k_crossfit.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.naver.maps.map.NaverMap;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,6 +61,13 @@ public class BoxActivity extends AppCompatActivity {
     private Animation blink;
     private double latitude; //위도
     private double longitude; //경도
+    private ApiSearch apiSearch;
+    private String searchResult;
+    private ArrayList<BoxData> boxList;
+    private Context context;
+    private String adminArea;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,12 +76,18 @@ public class BoxActivity extends AppCompatActivity {
         mapBtn = findViewById(R.id.imageview_box_mapBtn);
         gpsBtn = findViewById(R.id.imageview_box_gpsBtn);
         loadAddress = findViewById(R.id.textview_box_roadAddress);
+        searchBox = findViewById(R.id.button_box_searchBox);
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor = setting.edit();
         // 위치서비스 클라이언트
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         //애니메이션 불러오기
         blink = AnimationUtils.loadAnimation(this, R.anim.blink);
+        //리사이클러 뷰 지정
+        recyclerView = findViewById(R.id.recyclerView_box_boxList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        context = getApplicationContext();
 
         //지도버튼 클릭시 (다이얼로그 추가예정)
         mapBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +144,48 @@ public class BoxActivity extends AppCompatActivity {
                     Manifest.permission.ACCESS_COARSE_LOCATION
             });
         }
+        //BOX검색 버튼 클릭
+        searchBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //검색하기 시작 파라미터값에 지역 값을 넣어줄것이다 ex)강원도 1번 ~~시 한번
+                if (adminArea != "" && adminArea != null){
+                    apiSearch = new ApiSearch(adminArea+"크로스핏");
+                    try {
+                        apiSearch.start();
+                        //비동기 실행을 막기위해 join으로 끝나면 getJson()
+                        apiSearch.join();
+                    }catch (Exception e){
+                        Log.d("searchThread", "에러 발생 ");
+                    }
+                    searchResult =  apiSearch.getJson();
+                    Log.d("searchThread", "수정한 json: "+searchResult);
+                    JSONObject jsonObject;
+                    JSONArray jsonArray;
+                    try {
+                        jsonObject = new JSONObject(searchResult);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        jsonArray = jsonObject.getJSONArray("items");
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Type type = new TypeToken<ArrayList<BoxData>>() {
+                    }.getType();
+                    boxList = new ArrayList<>();
+                    Gson gson = new Gson();
+                    boxList = gson.fromJson(String.valueOf(jsonArray), type);
+                    Log.d("searchThread", "리스트1 번 반환: "+boxList.get(0).title);
+                    RecyclerView.Adapter adapter = new BoxAdapter(boxList,getApplicationContext(),latitude,longitude);
+                    recyclerView.setAdapter(adapter);
+                }else {
+                 Toast.makeText(getApplicationContext(),"위치정보가 없습니다 내 위치정보를 불러와주세요",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     // 현재 위치를 받아오고 그위치를 주소로 반환해 텍스트 넣어주는 메소드
@@ -142,6 +209,7 @@ public class BoxActivity extends AppCompatActivity {
                         try {
                             // 위도경도값으로 주소 데이터 생성
                             List<Address> address = g.getFromLocation(latitude, longitude, 10);
+                            adminArea = address.get(0).getAdminArea();
                             // 주소 받아와서 텍스트 변경해주기 대한민국은 잘라주려고 substring으로 처리해주었다. 너무 길면 표시에 제약이 있어서
                             loadAddress.setText(address.get(0).getAddressLine(0).toString().substring(5));
                             Log.d("gps", address.get(0).getAddressLine(0));
@@ -161,6 +229,8 @@ public class BoxActivity extends AppCompatActivity {
             });
         }
     }
+
+
 }
 
 

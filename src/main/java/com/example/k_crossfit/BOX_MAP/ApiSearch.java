@@ -1,4 +1,4 @@
-package com.example.k_crossfit;
+package com.example.k_crossfit.BOX_MAP;
 
 import static android.system.Os.connect;
 
@@ -26,15 +26,16 @@ public class ApiSearch extends Thread{
          this.text = text;
          this.clientId = "GS8szfeKBvYAPQOGXQFc";
          this.clientSecret = "n_9rQDPQvs";
+         String search;
 
         try {
-            text = URLEncoder.encode("강원도 크로스핏", "UTF-8");
+            search = URLEncoder.encode(text, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
         // URL을 만들어서 검색을 해준다  query 뒤에 UTF-8 인코딩된 text가 들어가고 &display=표시할검색결과수 &total 검색할 최대 갯수 !!
         //지역검색의 경우에는 최댓값이 5이기때문에 5개만 불러올수 있다.
-        apiURL = "https://openapi.naver.com/v1/search/local?query="+text+"&display=5&total=5"; //JSON
+        apiURL = "https://openapi.naver.com/v1/search/local?query="+search+"&display=5&total=5"; //JSON
         //검색시 헤더
         this.requestHeaders = new HashMap<>();
         // 클라이언트 계정
