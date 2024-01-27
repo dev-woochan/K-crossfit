@@ -83,9 +83,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 //            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
 //            naverMap.moveCamera(cameraUpdate);
             //세팅은 밑에가 맞는듯 ㅇㅇ
-            CameraPosition cameraPosition = new CameraPosition(latLng,10);
+            CameraPosition cameraPosition = new CameraPosition(latLng,14);
             naverMap.setCameraPosition(cameraPosition);
-
+        } else if (intent != null && intent.hasExtra("mapx")) {
 
         }
 

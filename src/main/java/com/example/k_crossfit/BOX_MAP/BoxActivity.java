@@ -164,11 +164,8 @@ public class BoxActivity extends AppCompatActivity {
                     JSONArray jsonArray;
                     try {
                         jsonObject = new JSONObject(searchResult);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         jsonArray = jsonObject.getJSONArray("items");
+
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -178,7 +175,7 @@ public class BoxActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     boxList = gson.fromJson(String.valueOf(jsonArray), type);
                     Log.d("searchThread", "리스트1 번 반환: "+boxList.get(0).title);
-                    RecyclerView.Adapter adapter = new BoxAdapter(boxList,getApplicationContext(),latitude,longitude);
+                    RecyclerView.Adapter adapter = new BoxAdapter(boxList,getBaseContext(),latitude,longitude);
                     recyclerView.setAdapter(adapter);
                 }else {
                  Toast.makeText(getApplicationContext(),"위치정보가 없습니다 내 위치정보를 불러와주세요",Toast.LENGTH_SHORT).show();

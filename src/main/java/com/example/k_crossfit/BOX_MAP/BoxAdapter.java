@@ -1,6 +1,8 @@
 package com.example.k_crossfit.BOX_MAP;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,23 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder
             this.link = itemView.findViewById(R.id.textview_boxItem_link);
             this.address = itemView.findViewById(R.id.textview_boxItem_address);
             this.showMapBtn = itemView.findViewById(R.id.imageview_boxItem_showMapBtn);
+
+            showMapBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos  = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        BoxData boxData = boxDataArrayList.get(pos);
+                        Intent intent;
+                        intent = new Intent(context, MapActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //인텐트로 mapxy
+                        intent.putExtra("mapx", boxData.mapx);
+                        intent.putExtra("mapy", boxData.mapy);
+                        (context).startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
