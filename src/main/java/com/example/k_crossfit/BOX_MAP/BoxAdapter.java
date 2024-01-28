@@ -3,6 +3,10 @@ package com.example.k_crossfit.BOX_MAP;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,22 +18,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.k_crossfit.R;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.geometry.Tm128;
+import com.naver.maps.map.NaverMap;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder> {
     public ArrayList<BoxData> boxDataArrayList;
     private Context context;
-    private double userLongitude;
-    private double userLatitude;
     public class CustomViewHolder extends RecyclerView.ViewHolder{
         private TextView boxName;
         private TextView distance;
         private TextView link;
         private TextView address;
         private ImageView showMapBtn;
+        double latitude;
+        double longitude;
+
         public CustomViewHolder(View itemView){
             super(itemView);
             this.boxName = itemView.findViewById(R.id.textview_boxItem_boxName);
@@ -48,8 +59,9 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder
                         intent = new Intent(context, MapActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         //인텐트로 mapxy
-                        intent.putExtra("mapx", boxData.mapx);
-                        intent.putExtra("mapy", boxData.mapy);
+
+                        intent.putExtra("latitude", latitude);
+                        intent.putExtra("longitude", longitude);
                         (context).startActivity(intent);
                     }
                 }
@@ -60,8 +72,6 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder
     BoxAdapter(ArrayList<BoxData> list,Context context,double latitude, double longitude){
         this.boxDataArrayList = list;
         this.context = context;
-        this.userLatitude = latitude;
-        this.userLongitude = longitude;
     }
 
     @NonNull
@@ -80,16 +90,9 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder
     @Override
     public void onBindViewHolder(@NonNull BoxAdapter.CustomViewHolder holder, int position) {
         BoxData boxData = boxDataArrayList.get(position);
-//        Tm128 tm128 = new Tm128(Double.parseDouble(boxData.mapx),Double.parseDouble(boxData.mapy));
-//        Log.d("gps", "mapx: "+boxData.mapx);
-//        Log.d("gps", "mapy: "+boxData.mapy);
-//        Log.d("gps", "userlatitude: "+userLatitude);
-//        Log.d("gps", "userlongitude: "+userLongitude);
-//        LatLng latLng = tm128.toLatLng();
-//        Log.d("gps", "latitude: "+position+latLng.latitude);
-//        Log.d("gps", "longitude: "+position+latLng.longitude);
-//        LatLng userLatLng = new LatLng(userLatitude,userLongitude);
-//        double distance = userLatLng.distanceTo(latLng);
+
+
+
 
         holder.boxName.setText(boxData.title.replaceAll("<b>","").replaceAll("</b>",""));
         holder.link.setText(boxData.link);

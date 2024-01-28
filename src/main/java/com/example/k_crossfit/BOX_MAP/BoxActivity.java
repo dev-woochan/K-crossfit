@@ -43,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,10 @@ public class BoxActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private SharedPreferences.Editor editor;
     private SharedPreferences setting;
+    private SharedPreferences boxDataShared;
+    private SharedPreferences.Editor boxEditor;
+    private SharedPreferences boxTitleShared;
+    private SharedPreferences.Editor titleEditor;
     private ActivityResultLauncher<String[]> locationPermissionRequest;
     private Animation blink;
     private double latitude; //위도
@@ -78,6 +83,11 @@ public class BoxActivity extends AppCompatActivity {
         loadAddress = findViewById(R.id.textview_box_roadAddress);
         searchBox = findViewById(R.id.button_box_searchBox);
         setting = getSharedPreferences("setting", MODE_PRIVATE);
+        boxDataShared =getSharedPreferences("boxDataShared",MODE_PRIVATE);
+        boxTitleShared = getSharedPreferences("boxTitleShared",MODE_PRIVATE);
+        titleEditor = boxTitleShared.edit();
+        boxEditor = boxDataShared.edit();
+
         editor = setting.edit();
         // 위치서비스 클라이언트
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -88,6 +98,7 @@ public class BoxActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         context = getApplicationContext();
+
 
         //지도버튼 클릭시 (다이얼로그 추가예정)
         mapBtn.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +176,6 @@ public class BoxActivity extends AppCompatActivity {
                     try {
                         jsonObject = new JSONObject(searchResult);
                         jsonArray = jsonObject.getJSONArray("items");
-
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -177,6 +187,27 @@ public class BoxActivity extends AppCompatActivity {
                     Log.d("searchThread", "리스트1 번 반환: "+boxList.get(0).title);
                     RecyclerView.Adapter adapter = new BoxAdapter(boxList,getBaseContext(),latitude,longitude);
                     recyclerView.setAdapter(adapter);
+                    Geocoder g = new Geocoder(context, Locale.KOREA);
+                    for (int i=0; i<boxList.size(); i++){
+                        try {
+                            // 주소를 위도와 경도로 변환
+                            List<Address> addresses = g.getFromLocationName(boxList.get(i).address, 1);
+                            if (addresses != null && !addresses.isEmpty()) {
+                                Address address = addresses.get(0);
+                                // 위도와 경도 얻기
+                                double latitude = address.getLatitude();
+                                double longitude = address.getLongitude();
+                                titleEditor.putString(String.valueOf(i),boxList.get(i).title);
+                                boxEditor.putString(boxList.get(i).title+"latitude",String.valueOf(latitude));
+                                boxEditor.putString(boxList.get(i).title+"logitude",String.valueOf(longitude));
+                                boxEditor.putString(boxList.get(i).title+"link",String.valueOf(boxList.get(i).link));
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    boxEditor.commit();
+                    titleEditor.commit();
                 }else {
                  Toast.makeText(getApplicationContext(),"위치정보가 없습니다 내 위치정보를 불러와주세요",Toast.LENGTH_SHORT).show();
                 }
@@ -214,6 +245,7 @@ public class BoxActivity extends AppCompatActivity {
                             e.printStackTrace();
                             Log.d("gps", "geocode 에러 발생  " + e);
                         }
+
                     }
                 }
             });
