@@ -106,6 +106,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             naverMap.setCameraPosition(cameraPosition);
         } else if (intent != null && intent.hasExtra("title")) {
             //title 을받아오면 title값의 latitude longitude로 포커싱해줄예정
+            String title = intent.getStringExtra("title");
+            String latitude = boxDataShared.getString(title+"latitude","위도");
+            String longitude = boxDataShared.getString(title+"logitude","경도");
+            userlatLng = new LatLng(Double.valueOf(latitude),Double.valueOf(longitude));
+            CameraPosition cameraPosition = new CameraPosition(userlatLng,15);
+            naverMap.setCameraPosition(cameraPosition);
+
         }
 
         //마커생성 및 정보창 생성

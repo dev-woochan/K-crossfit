@@ -29,7 +29,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.R;
+import com.example.k_crossfit.TimerActivity;
+import com.example.k_crossfit.myPage.MyPageActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +55,9 @@ import java.util.Locale;
 public class BoxActivity extends AppCompatActivity {
     private TextView loadAddress;
     private Button searchBox;
+    private Button timerBtn;
+    private Button calendarBtn;
+    private Button myPageBtn;
     private ImageView gpsBtn;
     private ImageView mapBtn;
     private RecyclerView recyclerView;
@@ -82,6 +88,9 @@ public class BoxActivity extends AppCompatActivity {
         gpsBtn = findViewById(R.id.imageview_box_gpsBtn);
         loadAddress = findViewById(R.id.textview_box_roadAddress);
         searchBox = findViewById(R.id.button_box_searchBox);
+        timerBtn = findViewById(R.id.button_box_timer);
+        calendarBtn = findViewById(R.id.button_box_calendar);
+        myPageBtn = findViewById(R.id.button_box_myPage);
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         boxDataShared =getSharedPreferences("boxDataShared",MODE_PRIVATE);
         boxTitleShared = getSharedPreferences("boxTitleShared",MODE_PRIVATE);
@@ -213,7 +222,24 @@ public class BoxActivity extends AppCompatActivity {
                 }
             }
         });
+        //메뉴 이동
+        timerBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
+        calendarBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        myPageBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     // 현재 위치를 받아오고 그위치를 주소로 반환해 텍스트 넣어주는 메소드

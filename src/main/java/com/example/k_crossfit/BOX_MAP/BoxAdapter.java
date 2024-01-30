@@ -59,9 +59,7 @@ public class BoxAdapter extends RecyclerView.Adapter<BoxAdapter.CustomViewHolder
                         intent = new Intent(context, MapActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         //인텐트로 mapxy
-
-                        intent.putExtra("latitude", latitude);
-                        intent.putExtra("longitude", longitude);
+                        intent.putExtra("title", boxData.title);
                         (context).startActivity(intent);
                     }
                 }
