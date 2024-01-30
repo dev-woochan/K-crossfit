@@ -58,6 +58,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     //위도 경도 변환 라이브러리
     implementation("org.locationtech.proj4j:proj4j:1.2.2")
+    //카카오 로그인
+    implementation("com.kakao.sdk:v2-user:2.19.0")
+
 }
 
 
