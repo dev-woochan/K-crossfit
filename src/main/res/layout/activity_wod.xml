@@ -156,24 +156,23 @@
         </LinearLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_wod_workoutView"
-            android:layout_width="match_parent"
-            android:layout_height="148dp"
-            android:layout_margin="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="9dp"
-            android:background="#F1F1F1"
-            android:orientation="vertical"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Linear1">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_wod_workoutView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:background="#F1F1F1"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear1">
 
 
-
-        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/memo_wod"
@@ -192,21 +191,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView_wod_workoutView" />
 
+
     <ImageView
         android:id="@+id/imageView_wod_addPhoto"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="130dp"
         android:background="@drawable/addwodphoto"
         android:contentDescription="사진을 추가해주세요"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memo_wod" />
-
-
 
     <LinearLayout
         android:id="@+id/linear3"

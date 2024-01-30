@@ -39,7 +39,7 @@
         tools:gravity="center">
 
         <Button
-            android:id="@+id/button_Calendar_box"
+            android:id="@+id/button_box_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -83,35 +83,19 @@
         app:layout_constraintTop_toBottomOf="@+id/TopText"
         app:layout_constraintVertical_bias="0.0">
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:minDate="01/01/2023"
-            android:weekNumberColor="@android:color/holo_red_light"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView_calendar_wodView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_calendar_wodView"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="19dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+            app:layout_constraintTop_toBottomOf="@+id/calendarView_calendar_calendar" />
 
         <Button
             android:id="@+id/button_calendar_addWod"
@@ -126,6 +110,31 @@
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <CalendarView
+            android:id="@+id/calendarView_calendar_calendar"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="19dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:minDate="01/01/2023"
+            android:weekNumberColor="@android:color/holo_red_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageview_calendar_enlarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/calendarView_calendar_calendar"
+            app:layout_constraintTop_toTopOf="@+id/calendarView_calendar_calendar"
+            app:srcCompat="@drawable/enlarge_102020" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
