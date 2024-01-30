@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.R;
+import com.kakao.sdk.common.KakaoSdk;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
         SharedPreferences.Editor editor = userData.edit();
         SharedPreferences.Editor settingEditor = setting.edit();
+        //카카오
+        KakaoSdk.init(this,"{5225db91ee1d9aea381bfeb5448f4400}");
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

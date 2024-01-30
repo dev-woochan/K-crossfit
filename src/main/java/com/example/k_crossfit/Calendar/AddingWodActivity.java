@@ -137,6 +137,7 @@ public class AddingWodActivity extends AppCompatActivity {
                 workoutDataArrayList = new ArrayList<>();
                 workoutData = new WorkoutData("", "", "", "");
                 workoutDataArrayList.add(workoutData);
+                workoutDataArrayList.add(workoutData);
             }
 
             //리사이클러뷰 시작

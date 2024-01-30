@@ -5,7 +5,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,14 +36,15 @@ public class CalendarActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<WodData> wodDataArrayList = new ArrayList<>();
     public CalendarAdapter adapter;
+    private ImageView enLarge;
     private Button myPageButton;
     private Button boxButton;
     private Gson gson;
     SharedPreferences userData;
     private SharedPreferences wodShared;
+    private CalendarView calendarView;
     private String loginId;
-    private SharedPreferences.Editor wodSharedEditor;
-
+    private boolean calendarON;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,8 +55,30 @@ public class CalendarActivity extends AppCompatActivity {
         userData = getSharedPreferences("userShared", MODE_PRIVATE);
         wodShared = getSharedPreferences("wodShared", MODE_PRIVATE);
         myPageButton = findViewById(R.id.button_calendar_myPage);
-        boxButton = findViewById(R.id.button_Calendar_box);
+        boxButton = findViewById(R.id.button_box_box);
+        calendarView = findViewById(R.id.calendarView_calendar_calendar);
+        calendarON = false;
+        enLarge = findViewById(R.id.imageview_calendar_enlarge);
 
+        //캘린더 창 크게줄이기 버튼
+        enLarge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (calendarON == false) {
+                    calendarON = true;
+                    ViewGroup.LayoutParams params = calendarView.getLayoutParams();
+                    params.height = params.height * 5;
+                    calendarView.setLayoutParams(params);
+                } else {
+                    calendarON = false;
+                    ViewGroup.LayoutParams params = calendarView.getLayoutParams();
+                    params.height = params.height / 5;
+                    calendarView.setLayoutParams(params);
+                }
+            }
+        });
+
+        //액티비티 이동용
         boxButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +101,6 @@ public class CalendarActivity extends AppCompatActivity {
             ArrayList<WodData> savedWodList = gson.fromJson(wodList, type);
             wodDataArrayList = savedWodList;
         }
-
 
 
         myPageButton.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +139,10 @@ public class CalendarActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         // 초기화
         // 인텐트 받아올 인텐트
+
     }
 
+    //와드 추가
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
