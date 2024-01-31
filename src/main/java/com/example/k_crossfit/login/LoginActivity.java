@@ -16,7 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.R;
+import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.user.UserApiClient;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText idInput;
     //이메일 입력칸
     private EditText passwordInput;
+    private Button kakaoLogin;
     //패스워드 입력칸
 
     //각 버튼 및 텍스트 변수 선언
@@ -40,12 +46,24 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.editText_login_PasswordInput);//패스워드 입력한것
         signInBtn = findViewById(R.id.button_login_signIn); //회원가입 버튼
         autoLoginCheckBox = findViewById(R.id.checkBox_login_autoLogin);
+        kakaoLogin = findViewById(R.id.button_login_kakaoLogin);
         SharedPreferences userData = getSharedPreferences("userShared", MODE_PRIVATE);
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
         SharedPreferences.Editor editor = userData.edit();
         SharedPreferences.Editor settingEditor = setting.edit();
         //카카오
-        KakaoSdk.init(this,"{5225db91ee1d9aea381bfeb5448f4400}");
+        KakaoSdk.init(this,"e044b26be68c7e643e493306d4b62576");
+        kakaoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserApiClient.getInstance().loginWithKakaoAccount(getBaseContext(), new Function2<OAuthToken, Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                        return null;
+                    }
+                });
+            }
+        });
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
