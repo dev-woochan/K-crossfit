@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#0B2B4A"
     android:visibility="visible"
+    tools:contentDescription="kakaoLoginButton"
     tools:visibility="visible">
 
 
@@ -114,7 +115,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
 
         <CheckBox
@@ -149,49 +150,12 @@
                 android:text="비밀번호찾기" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button_login_kakaoLogin"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="#F7E600"
-                android:backgroundTint="#F7E600"
-                android:fontFamily="@font/giantsregulars"
-                android:text="카카오"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/button_login_naver"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="#2DB400 "
-                android:fontFamily="@font/giantsregulars"
-                android:text="네이버"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/button_login_google"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="#CC0000"
-                android:fontFamily="@font/giantsregulars"
-                android:text="구글"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/button_login_kakaoLogin"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kakao_login_medium_wide"
+            tools:contentDescription="kakaoLoginButton" />
 
     </LinearLayout>
 
