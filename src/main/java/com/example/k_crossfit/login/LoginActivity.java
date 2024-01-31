@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import com.example.k_crossfit.R;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -52,16 +54,36 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = userData.edit();
         SharedPreferences.Editor settingEditor = setting.edit();
         //카카오
-        KakaoSdk.init(this,"e044b26be68c7e643e493306d4b62576");
+
         kakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserApiClient.getInstance().loginWithKakaoAccount(getBaseContext(), new Function2<OAuthToken, Throwable, Unit>() {
+                //카카오 계정을 이용한 로그인
+                UserApiClient.getInstance().loginWithKakaoAccount(getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
                     @Override
                     public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                        //
+                        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                            @Override
+                            public Unit invoke(User user, Throwable throwable) {
+                                //쉐어드 로그인 처리 여기서 하면될듯 아이디 지정
+//                                editor.putString() user.getKakaoAccount().getEmail();
+//                                user.getKakaoAccount().getName();
+//                                user.getId();
+                                Log.d("kakaoLogin",user.getKakaoAccount().getEmail());
+                                Log.d("kakaoLogin",user.getKakaoAccount().getName());
+                                Log.d("kakaoLogin",user.getId().toString());
+                                return null;
+                            }
+                        });
+                        Intent loginSuccess = new Intent(getApplicationContext(), CalendarActivity.class);
+                        //loginId는 지금 어떤 아이디가 로그인되었는지 저장하는 값임
+                        startActivity(loginSuccess);
+
                         return null;
                     }
                 });
+
             }
         });
 
@@ -69,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivityForResult(intent, 102);
+                startActivity(intent);
             }
         });// 클릭시 회원가입 화면으로 이동
 
