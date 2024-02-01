@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/giantsregulars"
-        android:text="K-CROSSFIT"
+        android:text="WOD 기록"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"

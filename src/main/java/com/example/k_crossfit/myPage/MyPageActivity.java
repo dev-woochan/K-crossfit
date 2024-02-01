@@ -35,11 +35,15 @@ import com.example.k_crossfit.Data.WodData;
 import com.example.k_crossfit.R;
 import com.example.k_crossfit.TimerActivity;
 import com.example.k_crossfit.login.LoginActivity;
+import com.kakao.sdk.user.UserApiClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MyPageActivity extends AppCompatActivity {
 
@@ -175,7 +179,14 @@ public class MyPageActivity extends AppCompatActivity {
                                 settingEditor.commit();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 Toast.makeText(getApplicationContext(), "탈퇴 되었습니다. 회원정보가 모두 삭제되었습니다", Toast.LENGTH_SHORT).show();
+                                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                                    @Override
+                                    public Unit invoke(Throwable throwable) {
+                                        return null;
+                                    }
+                                });
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         //취소 버튼
@@ -200,11 +211,18 @@ public class MyPageActivity extends AppCompatActivity {
                 editor.remove("autoLoginId");
                 editor.remove("autoLoginPassword");
                 settingEditor.putBoolean("autoLogin", false);
-                editor.apply();
+                editor.commit();
                 settingEditor.commit();
+                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(Throwable throwable) {
+                        return null;
+                    }
+                });
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 Toast.makeText(getApplicationContext(), "로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
+                finish();
             }
         });
         //프로필 수정버튼 터치시

@@ -64,7 +64,7 @@
         <activity
             android:name=".Calendar.CalendarActivity"
             android:exported="true"
-            android:launchMode="standard"></activity>
+            android:launchMode="singleTop"></activity>
 
         <activity
             android:name=".TimerActivity"

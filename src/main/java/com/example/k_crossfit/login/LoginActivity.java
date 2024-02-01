@@ -3,6 +3,8 @@ package com.example.k_crossfit.login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ipsec.ike.IkeSessionCallback;
+import android.net.ipsec.ike.IkeSessionConfiguration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +22,8 @@ import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.R;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.common.util.Utility;
+import com.kakao.sdk.user.UserApi;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
@@ -55,34 +60,36 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor settingEditor = setting.edit();
         //카카오
 
+        String keyHash = Utility.INSTANCE.getKeyHash(getApplicationContext());
+        Log.d("KeyHash", "onCreate: " + keyHash);
         kakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //카카오 계정을 이용한 로그인
                 UserApiClient.getInstance().loginWithKakaoAccount(getApplicationContext(), new Function2<OAuthToken, Throwable, Unit>() {
+
                     @Override
                     public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                        //
-                        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-                            @Override
-                            public Unit invoke(User user, Throwable throwable) {
-                                //쉐어드 로그인 처리 여기서 하면될듯 아이디 지정
-//                                editor.putString() user.getKakaoAccount().getEmail();
-//                                user.getKakaoAccount().getName();
-//                                user.getId();
-                                Log.d("kakaoLogin",user.getKakaoAccount().getEmail());
-                                Log.d("kakaoLogin",user.getKakaoAccount().getName());
-                                Log.d("kakaoLogin",user.getId().toString());
-                                return null;
-                            }
-                        });
-                        Intent loginSuccess = new Intent(getApplicationContext(), CalendarActivity.class);
-                        //loginId는 지금 어떤 아이디가 로그인되었는지 저장하는 값임
-                        startActivity(loginSuccess);
-
+                        if (oAuthToken != null) {
+                            //로그인 성공 시
+                            Toast.makeText(getApplicationContext(), "카카오 로그인 성공", Toast.LENGTH_SHORT);
+                            //정보 쉐어드에 저장해서 로그인시키기
+                            Intent loginSuccess = new Intent(getApplicationContext(), CalendarActivity.class);
+                            loginSuccess.putExtra("kakaoLogin","kakaoLogin");
+                            //loginId는 지금 어떤 아이디가 로그인되었는지 저장하는 값임
+                            startActivity(loginSuccess);
+                        } else {
+                            //로그인 실패시
+                            Toast.makeText(getApplicationContext(), "카카오 로그인 실패", Toast.LENGTH_SHORT).show();
+                            Log.d("kakaoLogin", "invoke: " + throwable);
+                        }
                         return null;
                     }
                 });
+                //위에가 안끝나도 밑에 코드가 진행됨 수정필요 아예 로그인 이후에 저장을하던가 ㅇㅇ
+                // 카카오 로그인 데이터가 있는지 조회 => 저장 이런식으로 구현하면될듯
+
+
 
             }
         });

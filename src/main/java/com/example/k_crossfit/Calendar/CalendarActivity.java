@@ -25,9 +25,14 @@ import com.example.k_crossfit.Data.WodData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class CalendarActivity extends AppCompatActivity {
     private Button timerButton;
@@ -59,6 +64,30 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView_calendar_calendar);
         calendarON = false;
         enLarge = findViewById(R.id.imageview_calendar_enlarge);
+        SharedPreferences.Editor editor = userData.edit();
+
+        Intent intent;
+        intent = getIntent();
+
+        //카카오 로그인시 인텐트 수신하여 유저 정보 적용
+        if (intent != null && intent.hasExtra("kakaoLogin")){
+            UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                @Override
+                public Unit invoke(User user, Throwable throwable) {
+                    String userId = String.valueOf(user.getId());
+                    String userName = String.valueOf(user.getKakaoAccount().getName());
+                    editor.putString(userId,userId);
+                    editor.putString("loginId",userId);
+                    editor.putString(userId+"name",userName);
+                    editor.commit();
+
+                    return null;
+                }
+            });
+        }
+
+
+
 
         //캘린더 창 크게줄이기 버튼
         enLarge.setOnClickListener(new View.OnClickListener() {

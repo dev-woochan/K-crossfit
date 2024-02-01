@@ -45,8 +45,6 @@ public class SignInActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = loginShared.edit();
         //쉐어드 설정 끝
 
-
-
         backButton = findViewById(R.id.button_signin_back); //view와 변수 연결
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
