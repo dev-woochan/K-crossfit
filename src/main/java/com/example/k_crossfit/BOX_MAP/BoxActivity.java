@@ -38,7 +38,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.naver.maps.map.NaverMap;
 
 
 import org.json.JSONArray;
@@ -90,7 +89,7 @@ public class BoxActivity extends AppCompatActivity {
         searchBox = findViewById(R.id.button_box_searchBox);
         timerBtn = findViewById(R.id.button_box_timer);
         calendarBtn = findViewById(R.id.button_box_calendar);
-        myPageBtn = findViewById(R.id.button_box_myPage);
+        myPageBtn = findViewById(R.id.button_timer_myPage);
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         boxDataShared =getSharedPreferences("boxDataShared",MODE_PRIVATE);
         boxTitleShared = getSharedPreferences("boxTitleShared",MODE_PRIVATE);

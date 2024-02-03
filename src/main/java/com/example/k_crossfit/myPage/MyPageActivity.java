@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import com.example.k_crossfit.BOX_MAP.BoxActivity;
 import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.Data.WodData;
 import com.example.k_crossfit.R;
@@ -53,6 +54,7 @@ public class MyPageActivity extends AppCompatActivity {
     private Button btnLogout;
     private Button btnTimer;
     private Button btnCalendar;
+    private Button btnBox;
     private TextView deleteUser;
     private TextView workoutCount;
     private ImageView profilePhoto;
@@ -83,6 +85,7 @@ public class MyPageActivity extends AppCompatActivity {
         deleteUser = findViewById(R.id.textView_myPage_deleteUser);
         photoText = findViewById(R.id.textView_myPage_addPhotoText);
         moveChart = findViewById(R.id.textView_myPage_moveChart);
+        btnBox = findViewById(R.id.button_timer_box);
         // 리소스 연결 끝
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
         SharedPreferences.Editor settingEditor = setting.edit();
@@ -130,6 +133,7 @@ public class MyPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         //타이머 이동
@@ -138,6 +142,16 @@ public class MyPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        //박스이동
+        btnBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BoxActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         //회원탈퇴 버튼 클릭시 정보 삭제

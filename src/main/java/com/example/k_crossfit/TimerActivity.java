@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.k_crossfit.BOX_MAP.BoxActivity;
 import com.example.k_crossfit.Calendar.CalendarActivity;
 import com.example.k_crossfit.etc.MySoundPlayer;
 import com.example.k_crossfit.myPage.MyPageActivity;
@@ -31,6 +32,8 @@ public class TimerActivity extends AppCompatActivity {
     private Button stopButton;//정지버튼
     private Button resetButton;//리셋버튼 = 00으로만듬
     private Button calendarButton; //캘린더 이동버튼
+    private Button boxButton;
+
     private ProgressBar progressBar;// 진행 도를 표시해주고픈 프로그래스바
     private CountDownTimer countDownTimer;
     private Button myPageButton;
@@ -48,7 +51,8 @@ public class TimerActivity extends AppCompatActivity {
         stopButton = findViewById(R.id.button_timer_stop);
         resetButton = findViewById(R.id.button_timer_reset);
         calendarButton = findViewById(R.id.button_box_calendar);
-        myPageButton = findViewById(R.id.button_box_myPage);
+        myPageButton = findViewById(R.id.button_timer_myPage);
+        boxButton = findViewById(R.id.button_timer_box);
         hourText = findViewById(R.id.editText_timer_hour);
         minuteText = findViewById(R.id.editText_timer_minute);
         secondText = findViewById(R.id.editText_timer_second);
@@ -81,7 +85,14 @@ public class TimerActivity extends AppCompatActivity {
             }
         }).start();
 
-
+    boxButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), BoxActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    });
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

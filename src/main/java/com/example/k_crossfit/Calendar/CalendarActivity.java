@@ -1,14 +1,16 @@
 package com.example.k_crossfit.Calendar;
 
+import static com.google.android.gms.tasks.Tasks.await;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -60,16 +62,13 @@ public class CalendarActivity extends AppCompatActivity {
         userData = getSharedPreferences("userShared", MODE_PRIVATE);
         wodShared = getSharedPreferences("wodShared", MODE_PRIVATE);
         myPageButton = findViewById(R.id.button_calendar_myPage);
-        boxButton = findViewById(R.id.button_box_box);
+        boxButton = findViewById(R.id.button_timer_box);
         calendarView = findViewById(R.id.calendarView_calendar_calendar);
         calendarON = false;
         enLarge = findViewById(R.id.imageview_calendar_enlarge);
         SharedPreferences.Editor editor = userData.edit();
-
         Intent intent;
         intent = getIntent();
-
-        //카카오 로그인시 인텐트 수신하여 유저 정보 적용
         if (intent != null && intent.hasExtra("kakaoLogin")){
             UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
                 @Override
@@ -80,13 +79,11 @@ public class CalendarActivity extends AppCompatActivity {
                     editor.putString("loginId",userId);
                     editor.putString(userId+"name",userName);
                     editor.commit();
-
                     return null;
                 }
             });
         }
-
-
+        //카카오 로그인시 인텐트 수신하여 유저 정보 적용
 
 
         //캘린더 창 크게줄이기 버튼
@@ -113,9 +110,28 @@ public class CalendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoxActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        myPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
+        // 타이머 버튼
+        timerButton = findViewById(R.id.button_myPage_timer);
+        timerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent moveTimer = new Intent(getApplicationContext(), TimerActivity.class);
+                startActivity(moveTimer);
+                finish();
+            }
+        });
 
         loginId = userData.getString("loginId", "id없음");
 
@@ -131,24 +147,6 @@ public class CalendarActivity extends AppCompatActivity {
             wodDataArrayList = savedWodList;
         }
 
-
-        myPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 타이머 버튼
-        timerButton = findViewById(R.id.button_myPage_timer);
-        timerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent moveTimer = new Intent(getApplicationContext(), TimerActivity.class);
-                startActivity(moveTimer);
-            }
-        });
 
         // 와드 추가 버튼
         addWodButton = findViewById(R.id.button_calendar_addWod);
@@ -173,7 +171,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     //와드 추가
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         ClassLoader classLoader = this.getClass().getClassLoader();
 

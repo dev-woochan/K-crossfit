@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             loginSuccess.putExtra("kakaoLogin","kakaoLogin");
                             //loginId는 지금 어떤 아이디가 로그인되었는지 저장하는 값임
                             startActivity(loginSuccess);
+                            finish();
                         } else {
                             //로그인 실패시
                             Toast.makeText(getApplicationContext(), "카카오 로그인 실패", Toast.LENGTH_SHORT).show();
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+        // 회원가입 이동
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,13 +115,14 @@ public class LoginActivity extends AppCompatActivity {
                     if (userData.getString(id + "pass", "id없음").equals(password)) {
                         //pass 맞은경우
                         if (autoLoginCheckBox.isChecked()) {
-                            //autologin체크되어있을시
+                            //autologin체크되어있을시 setting 쉐어드에 autoLogin boolean값, 로그인된 아이디 저장하기
                             editor.putString("autoLoginId", idInput.getText().toString());
                             editor.putString("autoLoginPassword", passwordInput.getText().toString());
                             settingEditor.putBoolean("autoLogin", true);
                             settingEditor.commit();
                             editor.commit();
                         } else {
+                            //체크 아닐시 오토로그인 해제 저장
                             settingEditor.putBoolean("autoLogin", false);
                             settingEditor.commit();
                         }
@@ -130,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("loginId", id);
                         editor.commit();
                         startActivity(loginSuccess);
+                        finish();
                     } else { //pass 틀린경우
                         Toast.makeText(getApplicationContext(), "id 및 패스워드를 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
