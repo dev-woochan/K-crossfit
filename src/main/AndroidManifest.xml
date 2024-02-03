@@ -30,10 +30,10 @@
         <!--  네이버 지도 api  -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="4y4nkzmsv4" />
+            android:value="네이버 네이티브앱키" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="e044b26be68c7e643e493306d4b62576"/>
+            android:value="네이티브앱키"/>
 
         <activity
             android:name=".Calendar.AddingWodActivity"

@@ -110,7 +110,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             String latitude = boxDataShared.getString(title+"latitude","위도");
             String longitude = boxDataShared.getString(title+"logitude","경도");
             userlatLng = new LatLng(Double.valueOf(latitude),Double.valueOf(longitude));
-            CameraPosition cameraPosition = new CameraPosition(userlatLng,15);
+            CameraPosition cameraPosition = new CameraPosition(userlatLng,17);
             naverMap.setCameraPosition(cameraPosition);
 
         }

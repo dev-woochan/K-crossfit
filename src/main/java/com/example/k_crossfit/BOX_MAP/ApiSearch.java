@@ -24,8 +24,8 @@ public class ApiSearch extends Thread{
     //생성자
     public ApiSearch(String text){
          this.text = text;
-         this.clientId = "GS8szfeKBvYAPQOGXQFc";
-         this.clientSecret = "n_9rQDPQvs";
+         this.clientId = "클라이언트아이디";
+         this.clientSecret = "비밀번호";
          String search;
 
         try {

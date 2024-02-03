@@ -9,6 +9,6 @@ import com.kakao.sdk.user.UserApiClient;
 public class KakaoApplication extends Application {
     public void onCreate(){
         super.onCreate();
-        KakaoSdk.init(getApplicationContext(),"e044b26be68c7e643e493306d4b62576");
+        KakaoSdk.init(getApplicationContext(),"카카오앱키");
     }
 }
