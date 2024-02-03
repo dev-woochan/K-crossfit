@@ -39,7 +39,7 @@
         tools:gravity="center">
 
         <Button
-            android:id="@+id/button_box_box"
+            android:id="@+id/button_timer_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
